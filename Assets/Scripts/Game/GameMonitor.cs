@@ -6,10 +6,12 @@ public class GameMonitor : Singleton<GameMonitor> {
 	public delegate void OnLevelStartedHandler(int levelNumber);
 	public delegate void OnLevelCompleteHandler(int levelNumber);
 	public delegate void OnLevelFailedHandler(int levelNumber);
-	
+	public delegate void OnDataResetHandler();
+
 	public event OnLevelStartedHandler OnLevelStarted;
 	public event OnLevelCompleteHandler OnLevelCompleted;
 	public event OnLevelFailedHandler OnLevelFailed;
+	public event OnDataResetHandler OnDataReset;
 
 	public const string COMPLETED_LEVELS_PREF = "completedLevels";
 	public const string LAST_PLAYED_LEVEL_PREF = "lastPlayedLevel";
@@ -53,6 +55,13 @@ public class GameMonitor : Singleton<GameMonitor> {
 		currentLevel = 0;
 
 		if (OnLevelFailed != null) OnLevelFailed(lastPlayedLevel);
+	}
+
+	public void ResetStoredData() {
+		PlayerPrefs.DeleteAll();
+		PlayerPrefs.Save();
+
+		if (OnDataReset != null) OnDataReset();
 	}
 
 	private void SaveCompletedLevel() {

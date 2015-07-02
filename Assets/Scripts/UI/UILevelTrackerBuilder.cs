@@ -21,6 +21,7 @@ public class UILevelTrackerBuilder : MonoBehaviour {
 		Monitor.OnLevelStarted += handleMonitorEvent;
 		Monitor.OnLevelCompleted += handleMonitorEvent;
 		Monitor.OnLevelFailed += handleMonitorEvent;
+		Monitor.OnDataReset += handleMonitorEvent;
 	}
 
 	private void updateButtons(int value) {
@@ -29,9 +30,8 @@ public class UILevelTrackerBuilder : MonoBehaviour {
 		updateBtnStates();
 	}
 
-	private void handleMonitorEvent(int value) {
-		updateBtnStates();
-	}
+	private void handleMonitorEvent() { updateBtnStates(); 	}
+	private void handleMonitorEvent(int value) { updateBtnStates();	}
 
 	private void updateBtnStates() {
 		startLevelBtn.interactable = Monitor.currentLevel == 0 && levelNumber <= Monitor.completedLevels + 1;
