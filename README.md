@@ -90,3 +90,36 @@ There are just few lines of code per each Custom Event we want to send. Hence tr
 
 ### Add `GameTracker` object
 Create empty object to the scene, name it `GameTracker` and make it a child of `GameManager`.
+
+# Step 2: Game Tracker
+
+## About
+
+`step-2-game-tracker` tag contains example code of basic applicatino extended with Game Tracker functionality sending Custom Events to Unity Analytics. 
+
+To get step 2 code you can checkout its tag running git instruction from the cmomand line.
+```
+git checkout step-2-game-tracker
+```
+
+## Integration validation
+
+### Test And Validate Analytics
+[ap1]: https://analytics.cloud.unity3d.com
+
+In next step you should use [Unity Analytics Admin Panel][ap1] to validate custom events are sent correctly. 
+
+To do that open [Unity Analytics Admin Panel][ap1], go to Projects tab, create new demo project and follow basic integration steps.
+
+During **Test & Validate** step, after **Cloud Project Id** is configured from Unity editor Player Settings panel, run the game, navigate back to admin panel and you should be able to see first data coming through. 
+
+**Important:** If you can't see anyting coming through go back to Player Settings window settings and double check **Disable HW Statistics** option is unchecked.
+
+### Validating Custom Events
+We have already added all the code to enable tracking custom events. In [Unity Analytics Admin Panel][ap1] you can now click **Validate Custom Events (optionsl)** link can be found in **Advanced Integration** section.
+
+As in case of basic validation, Custom Events can be validated directly by running the game directly from the Unity Editor. 
+
+Start the game and click *Play Level 1* button and you should see data coming through. You can send more data by clicking other buttons too. 
+
+It is good idea to add or spend some credits before completing differnt levels of the game. Remember to fail some levels too, so those events can be tracked as well.
