@@ -2,13 +2,13 @@
 
 ## About
 
-`step-1-simple-prototype` contains basic application code that will be used as a foundation to enable analytics.
+`step-1-simple-prototype` tag contains basic application code that will be used as a foundation to enable analytics.
 
 Take a look at documentation below to see what comes next. 
 
 To practice integration with Unity Analytics you can follow all steps detailed in below sub-section titled **Enabling tracking manualy**.
 
-To get the code from step 2, checkout run bellow command from the console and scroll down the document.
+To get the code from step 2 run bellow command from the console and scroll down the document to section titled **[Step 2: Game  Tracker][step2]**
 ```
 git checkout step-2-game-tracker
 ```
@@ -65,6 +65,8 @@ public class GameTracker : MonoBehaviour {
 
 ```
 
+**Note:** If you understand all the code you can skip next few paragraphs and look at section titled **[Step 2: Game  Tracker][step2]**.
+
 #### Game Start Event with account state
 Lets start with tracking Game Start Event passing it to the analytics service with user current account state. Game Analytics allows to send additional properties along with event name as a Dictionary type object.
 
@@ -92,6 +94,7 @@ There are just few lines of code per each Custom Event we want to send. Hence tr
 Create empty object to the scene, name it `GameTracker` and make it a child of `GameManager`.
 
 # Step 2: Game Tracker
+[step2]: #step-2-game-tracker
 
 ## About
 
