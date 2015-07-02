@@ -40,7 +40,7 @@ public class UILevelTrackerBuilder : MonoBehaviour {
 	}
 
 	private void updateBtnLabels(int value) {
-		startLevelBtn.GetComponentInChildren<Text>().text = "Start Level " + value.ToString();
+		startLevelBtn.GetComponentInChildren<Text>().text = "Play Level " + value.ToString();
 		completeLevelBtn.GetComponentInChildren<Text>().text = "Complete Level " + value.ToString();
 		failLevelBtn.GetComponentInChildren<Text>().text = "Fail Level " + value.ToString();
 	}

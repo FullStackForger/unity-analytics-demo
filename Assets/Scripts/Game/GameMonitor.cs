@@ -15,6 +15,7 @@ public class GameMonitor : Singleton<GameMonitor> {
 
 	public const string COMPLETED_LEVELS_PREF = "completedLevels";
 	public const string LAST_PLAYED_LEVEL_PREF = "lastPlayedLevel";
+	public const string CREDITS = "credits";
 	
 	public int currentLevel { get; private set; }
 	public int completedLevels { get { return PlayerPrefs.GetInt(COMPLETED_LEVELS_PREF); } }	
