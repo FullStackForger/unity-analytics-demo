@@ -13,6 +13,9 @@ public class UITrackerBtnCtrl : MonoBehaviour, IPointerClickHandler {
 	public int levelNumber = 0;
 	public TrackingType trackingType = TrackingType.None;
 
+	void Start() {
+		//Monitor.OnUpdate += 
+	}
 
 	public void OnPointerClick (PointerEventData eventData) {
 
