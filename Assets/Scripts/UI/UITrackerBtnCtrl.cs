@@ -9,15 +9,17 @@ public class UITrackerBtnCtrl : MonoBehaviour, IPointerClickHandler {
 	
 	public enum TrackingType { None, StartLevel, CompleteLevel, FailLevel }
 	private GameMonitor Monitor { get { return GameMonitor.Instance; } }
+	private Button button;
 
 	public int levelNumber = 0;
 	public TrackingType trackingType = TrackingType.None;
 
-	void Start() {
-		//Monitor.OnUpdate += 
+	void Start () {
+		button = GetComponent<Button>();
 	}
 
 	public void OnPointerClick (PointerEventData eventData) {
+		if (!button.IsInteractable()) return;
 
 		switch(trackingType) {
 		case TrackingType.StartLevel:

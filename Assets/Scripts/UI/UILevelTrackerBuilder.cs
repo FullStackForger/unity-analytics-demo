@@ -4,6 +4,8 @@ using System.Collections;
 
 public class UILevelTrackerBuilder : MonoBehaviour {
 
+	private GameMonitor Monitor { get { return GameMonitor.Instance; } }
+
 	public Button startLevelBtn;
 	public Button completeLevelBtn;
 	public Button failLevelBtn;
@@ -16,12 +18,25 @@ public class UILevelTrackerBuilder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		Monitor.OnLevelStarted += handleMonitorEvent;
+		Monitor.OnLevelCompleted += handleMonitorEvent;
+		Monitor.OnLevelFailed += handleMonitorEvent;
 	}
 
 	private void updateButtons(int value) {
 		updateBtnLabels(value);
 		updateBtnControllers(value);
+		updateBtnStates();
+	}
+
+	private void handleMonitorEvent(int value) {
+		updateBtnStates();
+	}
+
+	private void updateBtnStates() {
+		startLevelBtn.interactable = Monitor.currentLevel == 0 && levelNumber <= Monitor.completedLevels + 1;
+		completeLevelBtn.interactable = this.levelNumber == Monitor.currentLevel;
+		failLevelBtn.interactable = this.levelNumber == Monitor.currentLevel;
 	}
 
 	private void updateBtnLabels(int value) {

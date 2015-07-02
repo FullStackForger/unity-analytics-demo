@@ -3,13 +3,20 @@ using System.Collections;
 
 public class GameMonitor : Singleton<GameMonitor> {
 
-
+	public delegate void OnLevelStartedHandler(int levelNumber);
+	public delegate void OnLevelCompleteHandler(int levelNumber);
+	public delegate void OnLevelFailedHandler(int levelNumber);
+	
+	public event OnLevelStartedHandler OnLevelStarted;
+	public event OnLevelCompleteHandler OnLevelCompleted;
+	public event OnLevelFailedHandler OnLevelFailed;
 
 	public const string COMPLETED_LEVELS_PREF = "completedLevels";
-	public const string LAST_PLAYED_LEVEL_PREF = "completedLevels";
-
-	private int currentLevel = 0;
+	public const string LAST_PLAYED_LEVEL_PREF = "lastPlayedLevel";
 	
+	public int currentLevel { get; private set; }
+	public int completedLevels { get { return PlayerPrefs.GetInt(COMPLETED_LEVELS_PREF); } }	
+	public int lastPlayedLevel { get { return  PlayerPrefs.GetInt(LAST_PLAYED_LEVEL_PREF); } }
 	private bool canCompleteOrFail { get { return currentLevel != 0; } }			
 	private bool canStartNewLevel { get { return currentLevel == 0; } }		
 
@@ -19,16 +26,21 @@ public class GameMonitor : Singleton<GameMonitor> {
 			return;
 		}
 		currentLevel = levelNumber;
+
+		if (OnLevelStarted != null) OnLevelStarted(currentLevel);
 	}
 
 	public void CompleteLevel() {
 		if (!canCompleteOrFail) { 
 			Debug.LogError("You can't complete the level before starting it");
 			return;
-		}
+		}	
 
 		SaveLastPlayedLevel();
 		SaveCompletedLevel();
+		currentLevel = 0;
+
+		if (OnLevelCompleted != null) OnLevelCompleted(lastPlayedLevel);
 	}
 
 	public void FailLevel() {
@@ -36,22 +48,15 @@ public class GameMonitor : Singleton<GameMonitor> {
 			Debug.LogError("You can't fail the level before starting it");
 			return;
 		}
-	}
 
-	public int GetCurrentLevel() { 
-		return currentLevel; 
-	}
+		SaveLastPlayedLevel();
+		currentLevel = 0;
 
-	public int GetCompletedLevels() { 
-		return PlayerPrefs.GetInt(COMPLETED_LEVELS_PREF); 
-	}
-
-	public int GetLastPlayedLevel() { 
-		return PlayerPrefs.GetInt(LAST_PLAYED_LEVEL_PREF); 
+		if (OnLevelFailed != null) OnLevelFailed(lastPlayedLevel);
 	}
 
 	private void SaveCompletedLevel() {
-		if (currentLevel < PlayerPrefs.GetInt(COMPLETED_LEVELS_PREF)) {
+		if (currentLevel > PlayerPrefs.GetInt(COMPLETED_LEVELS_PREF)) {
 			PlayerPrefs.SetInt(COMPLETED_LEVELS_PREF, currentLevel);
 			PlayerPrefs.Save();
 		}		
