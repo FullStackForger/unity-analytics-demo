@@ -8,7 +8,7 @@ public class GameTracker : MonoBehaviour {
 	GameMonitor Monitor { get { return GameMonitor.Instance; } }
 
 	void Awake () {
-		Analytics.CustomEvent("gameStart", new Dictionary<string, object> {
+		Analytics.CustomEvent("GameStart", new Dictionary<string, object> {
 			{ "credits",  PlayerPrefs.GetInt(GameMonitor.CREDITS) }
 		});
 	}
@@ -24,19 +24,22 @@ public class GameTracker : MonoBehaviour {
 	}
 
 	void HandleOnLevelStarted (int levelNumber) {
-		Analytics.CustomEvent("levelStart", new Dictionary<string, object> {
+		Analytics.CustomEvent("GameLevelStart", new Dictionary<string, object> {
+			{ "level", Monitor.lastPlayedLevel },
 			{ "credits",  PlayerPrefs.GetInt(GameMonitor.CREDITS) }
 		});
 	}
 
 	void HandleOnLevelFailed (int levelNumber) {
-		Analytics.CustomEvent("levelFailure", new Dictionary<string, object> {
+		Analytics.CustomEvent("GameLevelFailure", new Dictionary<string, object> {
+			{ "level", Monitor.lastPlayedLevel },
 			{ "credits",  PlayerPrefs.GetInt(GameMonitor.CREDITS) }
 		});
 	}
 
 	void HandleOnLevelCompleted (int levelNumber) {
-		Analytics.CustomEvent("levelComplete", new Dictionary<string, object> {
+		Analytics.CustomEvent("GameLevelComplete", new Dictionary<string, object> {
+			{ "level", Monitor.lastPlayedLevel },
 			{ "credits",  PlayerPrefs.GetInt(GameMonitor.CREDITS) }
 		});
 	}
