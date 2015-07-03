@@ -6,7 +6,7 @@
 
 Take a look at documentation below to see what comes next. 
 
-To practice integration with Unity Analytics you can follow all steps detailed in below sub-section titled **Enabling tracking manualy**.
+To practice integration with Unity Analytics you can follow all steps detailed in below sub-section titled [Enabling tracking manualy][etc].
 
 To get the code from step 2 run bellow command from the console and scroll down the document to section titled **[Step 2: Game  Tracker][step2]**
 ```
@@ -14,6 +14,7 @@ git checkout step-2-game-tracker
 ```
 
 ## Enable tracking manualy
+[etc]: enable-tracking-manualy
 
 ### Create Game Tracker script
 Add `GameTracker.cs` script in `Assets/Scripts/Game` folder.
